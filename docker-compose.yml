@@ -1,0 +1,26 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./long_term_memory:/qdrant/storage
+    restart: unless-stopped
+  chainlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.chainlit
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - QDRANT_PORT=6333
+      - QDRANT_API_KEY=None
+      - QDRANT_HOST=localhost
+      - QDRANT_URL=http://qdrant:6333
+    restart: unless-stopped
+    volumes: 
+      - ./short_term_memory:/app/data
+    depends_on:
+      - qdrant

@@ -1,0 +1,22 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', '$LOCATION-docker.pkg.dev/$PROJECT_ID/ananya-app/app:latest', '-f', 'Dockerfile', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/ananya-app/app:latest']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'ananya', 
+  '--image', '$LOCATION-docker.pkg.dev/$PROJECT_ID/ananya-app/app:latest', 
+  '--port', '8080',
+  '--region', '$LOCATION',
+  '--platform', 'managed',
+  '--allow-unauthenticated',
+  '--project', '$PROJECT_ID',
+  '--memory', '4Gi',
+  '--min-instances', '1',
+  '--max-instances', '1',
+  '--timeout', '120',
+  '--add-volume', 'name=short-term-memory,type=in-memory,size-limit=1Gi',
+  '--add-volume-mount', 'volume=short-term-memory,mount-path=/app/data',
+images:
+- $LOCATION-docker.pkg.dev/$PROJECT_ID/ananya-app/app:latest
