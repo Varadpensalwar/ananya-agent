@@ -4,36 +4,36 @@ FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 # Install the project into `/app`
 WORKDIR /app
 
-# Set environment variables (e.g., set Python to run in unbuffered mode)
-ENV PYTHONUNBUFFERED 1
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
 
-# Install system dependencies for building libraries
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy the dependency management files (lock file and pyproject.toml) first
+# Copy dependency management files
 COPY uv.lock pyproject.toml README.md /app/
 
-# Install the application dependencies
+# Install Python dependencies
 RUN uv sync --frozen --no-cache
 
-# Copy your application code into the container
+# Copy application source
 COPY src/ /app/
 
-# Set the virtual environment environment variables
+# Set virtual environment
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
 
-# Install the package in editable mode
+# Install project in editable mode
 RUN uv pip install -e .
 
-# Define volumes
+# Define data volume
 VOLUME ["/app/data"]
 
-# Expose the port
+# Expose internal port
 EXPOSE 8000
 
-# Run the FastAPI app using uvicorn
-CMD ["chainlit", "run", "ai_companion/interfaces/chainlit/app.py", "--port", "8000", "--host", "0.0.0.0"]
+# Start the Chainlit app with Render-compatible port
+CMD ["sh", "-c", "chainlit run ai_companion/interfaces/chainlit/app.py --port ${PORT:-8000} --host 0.0.0.0"]
