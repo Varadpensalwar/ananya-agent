@@ -1,5 +1,4 @@
 from io import BytesIO
-
 import chainlit as cl
 from langchain_core.messages import AIMessageChunk, HumanMessage
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
