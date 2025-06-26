@@ -2,7 +2,7 @@
 
 First thing first, clone the repository.
 
-```
+```bash
 git clone https://github.com/neural-maze/ananya-whatsapp-agent-course.git
 cd ananya-whatsapp-agent-course
 ```
@@ -11,11 +11,11 @@ cd ananya-whatsapp-agent-course
 
 Instead of `pip` or `poetry`, we are using `uv` as the Python package manager. 
 
-To install uv, simply follow this [instructions](https://docs.astral.sh/uv/getting-started/installation/). 
+To install uv, simply follow these [instructions](https://docs.astral.sh/uv/getting-started/installation/). 
 
 # 3. Install the project dependencies
 
-Once uv is intalled, you can install the project dependencies. First of all, let's create a virtual environment.
+Once uv is installed, you can install the project dependencies. First of all, let's create a virtual environment.
 
 ```bash
 uv venv .venv
@@ -39,14 +39,14 @@ The Python version should be `Python 3.12.8`.
 Now that all the dependencies are installed, it's time to populate the `.env` file with the correct values.
 To help you with this, we have created a `.env.example` file that you can use as a template.
 
-```
+```bash
 cp .env.example .env
 ```
 
 Now, you can open the `.env` file with your favorite text editor and set the correct values for the variables.
 You'll notice there are a lot of variables that need to be set.
 
-```
+```env
 GROQ_API_KEY=""
 
 ELEVENLABS_API_KEY=""
@@ -79,7 +79,7 @@ To create the ELEVENLABS_API_KEY you need to create an account in [ElevenLabs](h
 
 ![alt text](img/elevenlabs_api_key.png)
 
-As for the voice ID, you can check the ananyailable voices and select the one you prefer! We'll cover this in a dedicated lesson.
+As for the voice ID, you can check the available voices and select the one you prefer! We'll cover this in a dedicated lesson.
 
 ### Together AI
 
@@ -109,7 +109,7 @@ Copy both values and paste them into your own `.env` file.
 
 Once you have everything set up, it's time to run the project locally. This is the best way to check that everything is working before starting the course.
 
-To run the project locally, we have created a [Makefile](../Makefile). Use the command `ananya-run` to start the project.
+To run the project locally, we have created a [Makefile](../Makefile). Use the command `make ananya-run` to start the project.
 
 ```bash
 make ananya-run
@@ -128,6 +128,6 @@ You should see something like this:
 
 ![ananya Chainlit](img/ananya_chainlit.png)
 
-Now that we have verified that everything is working, it's time to move on to the [Course Syllabus](../README.md) and start the first lesson!
+Now that we have verified that everything is working, it's time to move on to the [README](../README.md) and start using Ananya!
 
 > If you want to clean up the docker compose application and all the related local folders, you can run `make ananya-delete`. For more info, check the [Makefile](../Makefile).
