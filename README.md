@@ -1,4 +1,4 @@
-# Ananya AI Agent
+# Ananya AI Agent.
 
 Ananya is your personal AI buddy built with LangGraph, Chainlit, and various AI services. This open-source project creates an intelligent agent that can interact through text and voice, with potential WhatsApp integration. Feel free to use, modify, and contribute to this project - it's completely free under the MIT license!
 
